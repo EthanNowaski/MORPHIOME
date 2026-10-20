@@ -28,7 +28,7 @@ Additional parameter-configurating files:
   (4) discMain_M.cpp
         growth speed, anisotropic contractile spring coefficients, etc.
   (5) SceCells.cu
-        cell cycle length
+        cell level mechanics and operations
         
 *******************************************
 How to identify the flow of algorithm calling and simulation proceeding?
@@ -80,15 +80,13 @@ For (a):
 To run simulation on UCR HPCC cluster: 
    After uploading all the files under this repository, follow the command below.
    (1) cd [The folder where all your files are placed in]
-   (2) module load singluarity
-   (3) module load centos
-   (4) centos.sh
-   (5) module load extra; module load GCC; module load cuda;
-   (6) (IF it is the first time compiling) module load CGAL; module load cmake;
-   (7) (IF it is the first time compiling) cmake .
-   (8) make
-   (9) After compilation, enter: exit
-   (10) sbatch -p gpu --gres=gpu:1 --time=X:00:00 EpiScale_run.sh; (X here is the number of hours you want to keep the simulation running)
+   (2) Update simulation information including name and email in EpiScale_run_hpcc.sh
+   (3) Ensure properly loaded initial configuration files in resources folder
+   (4) Make desired changes elsewhere in code files
+   (5) module load cmake; module load cuda;
+   (6) (IF it is the first time compiling) cmake .
+   (7) make ("make >& make.log" if you'd like to have this printed into a file)
+   (8) sbatch -p gpu --gres=gpu:1 --time=X:00:00 EpiScale_run_hpcc.sh; (X here is the number of hours you want to keep the simulation running)
 
 *******************************************
 Initial conditions:
@@ -98,7 +96,7 @@ Initial conditions:
     (2) N02G00 & N02_0 : for curved wing disc
 
 *******************************************
-Examples of different perturbations or mechanism that can be tested using this codecan be found in the 
+Examples of different perturbations or mechanism that can be tested using this code can be found in the 
 Examples_of_perturbations folder:
   Inside this folder, there is a list of subfolders that contain different examples which will be listed below.
   To run any of the provided examples, the user must replace the files inside any of the following subfolders with the 
